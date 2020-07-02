@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+# install nginx on server
+sudo apt-get update
+sudo apt-get -y install nginx
+chmod 666 /usr/share/nginx/html/index.html
+echo "another virtual host using mix of IP-, name-, and port-based configuration
+
+server {
+       listen 80;
+       listen [::]:80 default_server ipv6only=on;
+
+        root /usr/share/nginx/html;
+        index index.html index.htm;
+
+
+       location 66.70.184.169/redirect_me {
+               rewrite ^/66.70.184.169/redirect_me/(.*)$ http://www.expedia.com/$1 redirect;
+       }
+}" > /etc/nginx/sites-available/default
+echo "<html><head><title>Page Title</title></head\
+><body>codeschool School !!!!!!!</body></html>" > /usr/share/nginx/html/index.html
+service nginx reload
+service nginx restart

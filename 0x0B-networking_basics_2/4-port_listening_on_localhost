@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# changes local host to listen on port 89
+nc -l 98

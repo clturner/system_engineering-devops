@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# ssh with private key to codeschool server
+ssh -i ~/.ssh/codeschool ubuntu@66.70.184.169

@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+# prints codeschool 10 time using while, prints bad luck from China, bad luck from Japan, bad luck from Italy on 4 , 9 and 17 iteration respectivly
+
+x=1
+while [ $x -lt 21 ]
+do
+    case $x in
+    4) echo $x
+       echo "bad luck from China"
+       (( x++ ))
+       ;;
+    9) echo $x
+       echo "bad luck from Japan"
+       (( x++ ))
+       ;;
+    17) echo $x
+        echo "bad luck from Italy"
+        (( x++ ))
+        ;;
+    *) echo $x
+       (( x++ ))
+       ;;
+    esac
+done

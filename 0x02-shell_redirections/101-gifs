@@ -1,0 +1,2 @@
+#!/bin/bash
+ls -aR | find . -name '*.gif' -printf '%f\n' | cut -f1 -d'.'

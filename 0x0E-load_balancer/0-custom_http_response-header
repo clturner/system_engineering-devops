@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# install nginx and adds server name to the responce header
+# shellcheck disable=SC2154
+sudo apt-get update
+sudo apt-get -y install nginx
+sudo service nginx start
+sudo sed -i "29i \\\tadd_header X-Served-By $(hostname);" /etc/nginx/sites-enabled/default
+sudo service nginx restart

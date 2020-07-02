@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# prints codeschool 10 time using until
+
+x=0
+until [ $x -ge 10 ]
+do
+  echo "codeschool School"
+  (( x++ ))
+done

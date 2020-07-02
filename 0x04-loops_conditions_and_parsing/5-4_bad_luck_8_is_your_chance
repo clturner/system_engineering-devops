@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# prints codeschool 10 time using while, and prints good luck on 4th and bad luck on 8th iteration
+
+x=1
+while [ $x -lt 11 ]
+do
+    if ((x == 4)); then
+	echo "bad luck"
+	(( x++ ))
+    elif ((x == 8)); then
+	echo "good luck"
+	(( x++ ))
+    else
+	echo "codeschool School"
+	(( x++ ))
+    fi
+done

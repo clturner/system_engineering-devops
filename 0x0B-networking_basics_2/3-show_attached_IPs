@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# prints all ipv4 ips in use
+hostname --all-ip-addresses || hostname -I

@@ -1,0 +1,5 @@
+#!/bin/bash
+# generates a MySQL dump and creates a compressed archive
+dt=$(date '+%m-%d-%Y');
+mysqldump -u root -p$1 --opt codeschool > backup.sql
+tar czvf $dt.tar.tgz backup.sql

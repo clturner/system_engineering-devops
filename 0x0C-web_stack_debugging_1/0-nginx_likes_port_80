@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# change listening port to 80 for local host
+sudo apt-get update
+sudo sed -i 's/listen 8080 default_server;/listen 80;/' /etc/nginx/sites-enabled/default
+sudo sed -i 's/listen \[::\]:8080 default_server ipv6only=on;/server_name localhost;/' /etc/nginx/sites-enabled/default
+sudo service nginx startls
+

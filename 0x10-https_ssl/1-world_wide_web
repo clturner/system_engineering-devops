@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+# prints the [SUB_DOMAIN],[RECORD_TYPE] and [DESTINATION]
+domain="$1"
+subdomain="$2"
+
+www_sd="www.$1"
+web1_sd="web-01.$1"
+web2_sd="web-02.$1"
+lb_sd="lb-01.$1"
+pass_sub="$2.$1"
+
+echo "$(dig $www_sd | grep -A1 'ANSWER SECTION:' | cut -d ':' -f 2 | tr [:space:] '+' | cut -d '+' -f 5 )" > dig
+re_www="$(awk '{print $1}' dig)"
+ip_www="$(dig $www_sd | grep -A1 'ANSWER SECTION:' | cut -d ':' -f 2 | tr [:space:] '+' | cut -d '+' -f 6)"
+
+echo "$(dig $web1_sd | grep -A1 'ANSWER SECTION:' | cut -d ':' -f 2 | tr [:space:] '+' | cut -d '+' -f 5 )" > dig1
+wb1_re="$(awk '{print $1}' dig1)"
+ip_wb1="$(dig $web1_sd | grep -A1 'ANSWER SECTION:' | cut -d ':' -f 2 | tr [:space:] '+' | cut -d '+' -f 6)"
+
+echo "$(dig $web2_sd | grep -A1 'ANSWER SECTION:' | cut -d ':' -f 2 | tr [:space:] '+' | cut -d '+' -f 5 )" > dig2
+wb2_re="$(awk '{print $1}' dig2)"
+ip_wb2="$(dig $web2_sd | grep -A1 'ANSWER SECTION:' | cut -d ':' -f 2 | tr [:space:] '+' | cut -d '+' -f 6)"
+
+echo "$(dig $web2_sd | grep -A1 'ANSWER SECTION:' | cut -d ':' -f 2 | tr [:space:] '+' | cut -d '+' -f 5 )" > dig3
+lb_re="$(awk '{print $1}' dig3)"
+ip_lb="$(dig $lb_sd | grep -A1 'ANSWER SECTION:' | cut -d ':' -f 2 | tr [:space:] '+' | cut -d '+' -f 6)"
+
+echo "$(dig $web2_sd | grep -A1 'ANSWER SECTION:' | cut -d ':' -f 2 | tr [:space:] '+' | cut -d '+' -f 5 )" > dig4
+re="$(awk '{print $1}' dig4)"
+ip="$(dig $pass_sub | grep -A1 'ANSWER SECTION:' | cut -d ':' -f 2 | tr [:space:] '+' | cut -d '+' -f 6)"
+
+if [ -z "$subdomain" ];
+then
+    echo "The subdomain www is a $re_www record and points to $ip_www"
+    echo "The subdomain lb-01 is a $lb_re record and points to $ip_lb"
+    echo "The subdomain web-01 is a $wb1_re record and points to $ip_wb1"
+    echo "The subdomain web-02 is a $wb2_re record and points to $ip_wb2"
+else
+    echo "The subdomain $2 is a $re record and points to $ip"
+fi
+rm dig dig1 dig2 dig3 dig4

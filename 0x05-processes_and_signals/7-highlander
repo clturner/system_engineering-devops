@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# runs infinite loop and catches a sigterm to change what it prints
+trap "echo I am invincible!!!" SIGTERM
+while true; do
+    echo "To infinity and beyond"
+    sleep 2
+done
